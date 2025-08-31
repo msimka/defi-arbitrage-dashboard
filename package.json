@@ -1,0 +1,35 @@
+{
+  "name": "defi-arbitrage-dashboard",
+  "version": "1.0.0",
+  "description": "DeFi arbitrage trading platform with ML-driven strategies",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "build": "webpack --mode=production",
+    "test": "jest",
+    "dashboard": "cd src/dashboard && npm run dev"
+  },
+  "keywords": ["defi", "arbitrage", "trading", "blockchain", "ml"],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "ethers": "^6.0.0",
+    "web3": "^4.0.0",
+    "@1inch/token-plugins": "^1.0.0",
+    "axios": "^1.6.0",
+    "express": "^4.18.0",
+    "socket.io": "^4.7.0",
+    "redis": "^4.6.0",
+    "pg": "^8.11.0",
+    "dotenv": "^16.3.0",
+    "winston": "^3.10.0",
+    "node-cron": "^3.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0",
+    "jest": "^29.7.0",
+    "webpack": "^5.88.0",
+    "webpack-cli": "^5.1.0"
+  }
+}

@@ -1,0 +1,77 @@
+id: "sandwich_detector"
+name: "Sandwich Attack Opportunity Detector"
+version: "1.0.0"
+stage: "Stage 1: Brute Force"
+parent: "mev_trading_manager"
+dependencies: []
+
+meta:
+  purpose: "Detect profitable sandwich attack opportunities in mempool transactions"
+  performance_targets: 
+    - "Detection latency: <10ms per transaction"
+    - "Accuracy: >85% profitable opportunity identification"
+    - "False positive rate: <15%"
+    - "Throughput: 1000+ transactions/second analysis"
+  
+  inputs:
+    pending_transaction: "Ethereum mempool transaction object"
+    gas_price_context: "Current gas price and network conditions"
+    liquidity_pool_state: "Real-time DEX pool reserves and pricing"
+  
+  outputs:
+    opportunity_score: "0-100 profitability score"
+    estimated_profit: "USD profit estimation"
+    execution_parameters: "Optimal front-run and back-run amounts"
+    risk_assessment: "Risk factors and mitigation strategies"
+
+mathematical_foundation:
+  algorithm: "Uniswap V2/V3 constant product formula analysis"
+  complexity: "O(1) per transaction - constant time detection"
+  accuracy_threshold: ">85% profit prediction accuracy"
+  profit_calculation: |
+    profit = (victim_trade_impact * front_run_amount * (1 - slippage_loss)) - gas_costs
+    where victim_trade_impact = calculate_price_impact(victim_amount, pool_reserves)
+
+business_workflow:
+  step_1: "Monitor mempool for pending DEX transactions"
+  step_2: "Calculate price impact of victim transaction on target pool"
+  step_3: "Determine optimal front-run position size"
+  step_4: "Estimate total profit after gas costs and slippage"
+  step_5: "Return structured opportunity assessment"
+
+validation:
+  pseudo_compilation: "Function signature matches Elixir GenServer pattern"
+  tree_traversal: "Component integrates with mev_trading_manager parent"
+  blockchain_verification: "Ethereum transaction format compliance"
+  dependency_validation: "Zero external dependencies - pure function"
+
+error_handling:
+  invalid_transaction: "Return {:error, :invalid_transaction_format}"
+  insufficient_liquidity: "Return {:error, :insufficient_pool_liquidity}"
+  gas_price_spike: "Return {:error, :gas_costs_exceed_profit}"
+  network_congestion: "Return {:error, :network_timeout}"
+
+performance_guarantees:
+  latency: "<10ms detection time"
+  throughput: "1000+ transactions/second"
+  memory_usage: "<1MB per 1000 pending transactions"
+  accuracy: ">85% profit prediction accuracy"
+
+children:
+  - id: "price_impact_calculator"
+    responsibilities: ["Calculate victim transaction price impact"]
+    subdaemons: ["uniswap_v2_calculator", "uniswap_v3_calculator", "curve_calculator"]
+  
+  - id: "gas_cost_estimator"
+    responsibilities: ["Estimate front-run and back-run gas costs"]
+    subdaemons: ["gas_price_predictor", "transaction_size_calculator"]
+  
+  - id: "profit_optimizer"
+    responsibilities: ["Determine optimal front-run position size"]
+    subdaemons: ["slippage_calculator", "mev_competition_analyzer"]
+
+component_signature:
+  function_name: "detect_sandwich_opportunity"
+  input_type: "PendingTransaction"
+  output_type: "SandwichOpportunity | Error"
+  execution_guarantee: "Pure function - no side effects"
